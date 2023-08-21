@@ -8,9 +8,9 @@ const App = () => {
     };
 
 
-  useEffect(() => {
-    getImage();
-  }, []);
+  // useEffect(() => {
+  //   getImage();
+  // }, []);
 
   const [Imagedata, setImageData] = useState([]);
   const getImage = async () => {
