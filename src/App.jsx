@@ -1,50 +1,56 @@
+import React, { useState } from 'react'
+import axios from 'axios'
 
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-const App = () => {
-  const logo ={
-      logo: "Developer",
-      logoicon: <i class="bi bi-code"></i>
-    };
+const App= ()=>{
+  const [image, setImage]=useState([]);
 
-
-  // useEffect(() => {
-  //   getImage();
-  // }, []);
-
-  const [Imagedata, setImageData] = useState([]);
-  const getImage = async () => {
+  const getImage= async ()=>{
     try {
-      const res = await axios.get("https://picsum.photos/v2/list");
-      const data = await res.data;
-      setImageData(data);
-      // console.log(Imagedata);
+      const res=axios.get("https://picsum.photos/v2/list");
+      const data=(await res).data;
+      setImage(data)
+      // console.log(data);
     } catch (error) {
-      console.log("Data Not Show");
+      console.log("something wrong in api")
     }
-  };
-  return (
-    <>
-      <button
-        // className="py-5 px-5 bg-green-500 text-white mt-2 block"
-        onClick={getImage}
-      >
-        Get Image
-      </button>
+  }
 
-      {Imagedata.map((ele, i) => {
-        return (
-          <img
-            key={i}
-            src={ele.download_url}
-            width={300}
-            height={300}
-            // className="inline-block m-10 rounded"
-          />
-        );
-      })}
-    </>
-  );
-};
+  return(
 
-export default App;
+
+<>
+  
+<button onClick={getImage} style={{
+  padding:"15px 25px",
+  backgroundColor:"green",
+  display:"flex",
+  alignItems:"center",
+  justifyContent:"center",
+  width:"200px",
+  margin:"100px",
+  cursor:"pointer"
+}}>
+  click me
+</button>
+
+<br />
+{
+image.slice(11,30).map((e,id)=>{
+  return <>
+  <img src={e.download_url
+} alt=""  key={id} style={{
+  width:"369px", display:"inline-block", padding:"20px"
+}}/>
+  </>
+})
+}
+</>
+
+
+
+
+  )
+
+}
+
+export default App
